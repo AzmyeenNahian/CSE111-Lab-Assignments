@@ -1,0 +1,96 @@
+// TASK 1
+
+public class CSECourse {
+  public String courseName = "Programming Language II";
+  public String courseCode = "CSE111";
+  public int credit = 3;
+}
+
+
+// TASK 2
+
+public class ImaginaryNumber {
+  public int realPart = 0;
+  public int imaginaryPart = 0;
+  
+  public String printNumber() {
+    String x = realPart +" + "+ imaginaryPart+"i";
+    return x;
+  }
+}
+
+
+// TASK 3
+
+public class Assignment {
+  public int tasks = 0;
+  public String difficulty;
+  public boolean submission = false;
+  
+  public void printDetails () {
+    System.out.println("Number of tasks: " + tasks);
+    System.out.println("Difficulty level: " + difficulty);
+    System.out.println("Submission required: " + submission);
+  }
+  
+  public String makeOptional () {
+    String x ="";
+    if (submission == false) {
+      x = "Submission is already not required";
+    } else {
+      x = "Assignment will not require submission";
+    }
+    return x;
+  }
+}
+
+//TASK 4
+
+public class Employee  {
+  public String name;
+  public double Salary;
+  public String designation;
+  public double Tax;
+  
+  public void newEmployee (String x) {
+    name = x;
+    Salary = 30000.00;
+    designation = "junior";
+  }
+  
+  public void displayInfo () {
+    System.out.println("Employee Name: "+ name);
+    System.out.println("Employee Salary: "+ Salary+" Tk");
+    System.out.println("Employee Designation: "+ designation);
+  }
+  
+  public void calculateTax () { 
+    if (Salary >50000.00) {
+      Tax = (30.00/100.00) * Salary;
+    }else if (Salary > 30000.00) {
+      Tax = (10.00/100.00) * Salary;
+    }
+    if (Tax!= 0.00) {
+    System.out.println(name +  " Tax Amount: " + Tax+ " Tk");
+    } else {
+      System.out.println("No need to pay tax");
+    }
+  }
+  
+  public void promoteEmployee (String xx) {
+    designation = xx ;
+    
+    if (designation.equals("lead")) {
+      Salary += 50000.00;
+    } else if (designation.equals("senior")) {
+      Salary += 25000.00;
+    } else if (designation.equals("manager")) {
+      Salary += 75000.0;
+    }
+               
+    System.out.println(name+ " has been promoted to "+designation);
+    System.out.println("New Salary: "+Salary +" Tk");
+  } 
+            
+             
+}

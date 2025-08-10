@@ -1,0 +1,257 @@
+//TASK 1
+
+import java.util.Scanner;
+public class PracticeProb {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int first = x;
+        int second = y;
+
+        if (x > y) {
+            first = y;
+            second = x;
+        }
+
+
+         int counter = 0;
+        for (int i = first; i <= second; i++) {
+            boolean flag = false;
+            for (int j = 2; j <= i/2; j++) {
+                if (i % j == 0) {
+                    flag = true;
+                    break;
+                }
+
+            }
+            if (flag == false) {
+                counter++;
+            }
+        }
+        System.out.println("There are "+ counter + " prime numbers between " + first + " and " + second + ".");
+    }
+}
+
+
+//TASK 2
+
+import java.util.Scanner;
+public class PracticeProb {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String s1 = sc.nextLine();
+
+        for (int i = 0; i < s1.length(); i++) {
+            char c = s1.charAt(i);
+            int c1 = (int) c;
+            c1--;
+            char c2 = (char) c1;
+            System.out.print(c2);
+        }
+
+    }
+}
+
+//TASK 3
+
+import java.util.Scanner;
+public class PracticeProb {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the length of the array:");
+        int z = sc.nextInt();
+        int [] ar1 = new int [z];
+        for (int i = 0; i < ar1.length; i++) {
+            ar1[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < ar1.length/2; i++) {
+            int temp = ar1[i];
+            ar1[i] = ar1[z-1];
+            ar1[z-1] = temp;
+            z--;
+        }
+
+       
+
+        for (int i = 0; i < ar1.length; i++) {
+            System.out.print(ar1[i] + " ");
+        }
+
+    }
+}
+
+
+
+//TASK 4
+
+import java.util.Scanner;
+public class PracticeProb {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int [] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            boolean flag = false;
+            int counter =0;
+            for (int j = i-1; j >=0; j--) {
+                if (arr[i] == arr[j]) {
+                    flag = true;
+                }
+            }
+            if (flag == false) {
+                for (int k = i; k < arr.length; k++) {
+                    if (arr[i] == arr[k]) {
+                        counter++;
+                    }
+                }
+                System.out.println(arr[i] +" - "+counter+" times");
+            }
+
+        }
+    }
+}
+
+
+//TASK 5
+
+import java.util.Scanner;
+public class TreasureHunt{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int [][] arr2D = {{0, 0, 10, 0, -1},
+                {0, -1, 0, 0, -1},
+                {-1, 0, -1, 0, 0},
+                {0, -1, 7, 0, -1},
+                {0, -1, 0, -1, 0}
+        };
+        System.out.println("Initial Map:");
+        printMap(arr2D);
+        int row = arr2D.length;
+        int col = arr2D[0].length;
+        int row_pos = -1, col_pos = -1;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if(arr2D[i][j] == 7){
+                    row_pos = i;
+                    col_pos = j;
+                }
+            }
+        }
+
+
+        int turns = 5;
+        while (turns > 0) {
+            int new_row = row_pos, new_col = col_pos;
+            System.out.printf("Enter move %d: ",(6-turns));
+            String inp = sc.nextLine();
+
+            if (inp.equals("LEFT")) {
+                if (col_pos-1 <0) {
+                    System.out.println("Player fell outside the playing area. Game over! ");
+                    break;
+                }
+                else if (arr2D[row_pos][col_pos-1] == 0) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[row_pos][--col_pos] = 7;
+                }
+                else if (arr2D[row_pos][col_pos-1] == -1) {
+                    System.out.println("Player stepped on mine. Game Over!");
+                    break;
+                } else if (arr2D[row_pos][col_pos-1] == 10) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[row_pos][--col_pos] = 7;
+                    System.out.println("Treasure found. You win!");
+                    System.out.println("Final state:");
+                    printMap(arr2D);
+                    break;
+                }
+            }
+            else if (inp.equals("RIGHT")) {
+                if (col_pos+1 >col-1) {
+                    System.out.println("Player fell outside the playing area. Game over! ");
+                    break;
+                }
+                else if (arr2D[row_pos][col_pos+1] == 0) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[row_pos][++col_pos] = 7;
+                }
+                else if (arr2D[row_pos][col_pos+1] == -1) {
+                    System.out.println("Player stepped on mine. Game Over!");
+                    break;
+                } else if (arr2D[row_pos][col_pos+1] == 10) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[row_pos][++col_pos] = 7;
+                    System.out.println("Treasure found. You win!");
+                    System.out.println("Final state:");
+                    printMap(arr2D);
+                    break;
+                }
+            } else if (inp.equals("UP")) {
+                if (row_pos-1 <0) {
+                    System.out.println("Player fell outside the playing area. Game over! ");
+                    break;
+                }
+                else if (arr2D[row_pos-1][col_pos] == 0) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[--row_pos][col_pos] = 7;
+                }
+                else if (arr2D[row_pos-1][col_pos] == -1) {
+                    System.out.println("Player stepped on mine. Game Over!");
+                    break;
+                } else if (arr2D[row_pos-1][col_pos] == 10) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[--row_pos][col_pos] = 7;
+                    System.out.println("Treasure found. You win!");
+                    System.out.println("Final state:");
+                    printMap(arr2D);
+                    break;
+                }
+            } else if (inp.equals("DOWN")) {
+                if (row_pos+1 >row-1) {
+                    System.out.println("Player fell outside the playing area. Game over! ");
+                    break;
+                }
+                else if (arr2D[row_pos+1][col_pos] == 0) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[++row_pos][col_pos] = 7;
+                }
+                else if (arr2D[row_pos+1][col_pos] == -1) {
+                    System.out.println("Player stepped on mine. Game Over!");
+                    break;
+                } else if (arr2D[row_pos+1][col_pos] == 10) {
+                    arr2D[row_pos][col_pos] = 0;
+                    arr2D[++row_pos][col_pos] = 7;
+                    System.out.println("Treasure found. You win!");
+                    System.out.println("Final state:");
+                    printMap(arr2D);
+                    break;
+                }
+            }
+            System.out.println("Current state:");
+            printMap(arr2D);
+            turns--;
+        }
+        if (turns == 0) {
+            System.out.println("Failed to find the treasure.");
+        }
+    }
+
+    public static void printMap(int[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
